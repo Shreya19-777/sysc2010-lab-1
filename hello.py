@@ -9,3 +9,6 @@ print(data)
 #Loading the CSV file
 file = 'env_temp_humidity_clean.csv'
 df = pd.read_csv(file)
+
+
+print("New print statement")
