@@ -17,8 +17,43 @@ print(df.loc[0, "Column1"])
 
 
 #Part 5: Hands on Tasks
+#5.1 Plotting a Frequency Distribution
+def plot_freq ():
+    f = 10
+    fs = 500
+    A = 5
+    duration =1
+    t = np.arange(0, 1, 1/fs)
+    y = A * np.sin(2 * np.pi * f * t)
+    plt.plot(t,y)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Amplitude")
+    plt.title("Sine Wave")
+    plt.show()
+    print("Frequency plot complete.")
+#5.2 Generating Random Noise
+def sample_noises ():
+    f = 10
+    fs = 500
+    A = 5
+    duration =1
+    t = np.arange(0, 1, 1/fs)
+    y = noisy_signal
+    noise_sample = []
+    noise_sample = np.random.normal(0, 1, 500) 
+    signal = (A * np.sin(2 * np.pi * f * t))
+    noisy_signal = []
+    noisy_signal = 0.25 * noise_sample + signal
+
+    plt.plot(t, y)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Amplitude")
+    plt.title("Real Life Noisy Signal")
+    plt.show()
+
 #5.3 Simulate Sensor Readings
 def sample_temps () :
+    
     temp_samples = []
     for i in range(120) :
         sec = i*60
@@ -44,9 +79,17 @@ def plot_temp () :
     x = np.array(times_to_plot)
     
     plt.plot(x,y)
-    plt.show()
+    plt.title("Tempraature Readings Over Time")
+    plt.ylabel("Temprature (C)")
     plt.xlabel("Time (s)")
+    plt.show()
+
 
 if __name__ == "__main__" :
     #sample_temps()
     plot_temp()
+    plot_freq()
+    sample_noises ()
+
+
+
