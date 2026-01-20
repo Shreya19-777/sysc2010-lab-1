@@ -41,6 +41,7 @@ def sample_noises ():
     fs = 500
     A = 5
     
+    #Generating the noise and adding to the clean signal
     t = np.arange(0, 1, 1/fs)
     noise_sample = []
     noise_sample = np.random.normal(0, 1, 500) 
@@ -48,10 +49,18 @@ def sample_noises ():
     noisy_signal = []
     noisy_signal = 0.25 * noise_sample + signal
     
+    t1 = np.arange(0, 1, 1/fs)
+    y1 = noisy_signal
+    
+    #Clean signal
+    f = 10
+    fs = 500
+    A = 5
     t = np.arange(0, 1, 1/fs)
-    y = noisy_signal
+    y = A * np.sin(2 * np.pi * f * t)
 
-    plt.plot(t, y)
+    plt.plot(t1, y1, color='red')
+    plt.plot(t,y, color = 'blue')
     plt.xlabel("Time (s)")
     plt.ylabel("Amplitude")
     plt.title("Real Life Noisy Signal")
@@ -68,6 +77,7 @@ def sample_temps () :
     print(temp_samples)
     
     df = pd.DataFrame(temp_samples)
+    #writing to the sensor_readings csv file
     with open('sensor_readings.csv', 'w', newline='') as file :
         df.to_csv(file, index=False)
 
@@ -76,6 +86,7 @@ def plot_temp () :
     times_to_plot = []
     df = pd.read_csv('sensor_readings.csv')
     
+    #plotting 
     temps_to_plot = df.loc[40:81, "Temperature(C)"].tolist()
     times_to_plot = df.loc[40:81, "Time (s)"].tolist()
     print(temps_to_plot)
@@ -90,29 +101,51 @@ def plot_temp () :
     plt.xlabel("Time (s)")
     plt.show()
 
-#Part 6: Exploring and Handling Sensor Data*************************************
+#Part 6: ************************Exploring and Handling Sensor Data**********************************
 def load_csv() :
     df = pd.read_csv('env_temp_humidity_clean.csv')
-    x = np.array(df.loc[0:1441, "temperature_C"].tolist())
-    y = np.array(df.loc[0:1441, "humidity_pct"].tolist())
     
-    column_names = df.columns.tolist()
-    print(column_names)
-    plt.scatter(x,y)
+    temp = np.array(df.loc[0:1441, "temperature_C"].tolist())
+    humidity = np.array(df.loc[0:1441, "humidity_pct"].tolist())
+    
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    reference_time = df['timestamp'].iloc[0].normalize() 
+    time_difference = df['timestamp'] - reference_time
+    df['total_minutes'] = time_difference.dt.total_seconds() / 60
+    total_min = df['total_minutes'].astype(int)
+    
+    time = total_min
+    print(time)
+    
+    plt.title("Temperature vs Time")
+    plt.scatter(time,temp)
+    plt.xlabel("Time (min)")
+    plt.ylabel("Temperature (C)")
     plt.show()
     
-    # Convert timestamp to actual datetime objects
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    plt.title("Humidity vs Time")
+    plt.scatter(time, humidity)
+    plt.xlabel("Time (min)")
+    plt.ylabel("Humidity")
+    plt.show()
 
     # Display key info
-    print("--- First 5 Rows ---")
+    print("First 5 Rows:")
     print(df.head())
 
-    print("\n--- Column Names ---")
+    print("\nColumn Names:")
     print(df.columns)
 
-    print("\n--- Data Types ---")
+    print("\nData Types")
     print(df.dtypes)
+    
+    # Check for missing values
+    print("\nMissing Values: ")
+    print(df.isna().sum())
+
+    # Check for outliers
+    print("\nChecking for outliers: ")
+    print(df.describe())
 
 
 
