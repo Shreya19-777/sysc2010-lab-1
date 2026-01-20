@@ -87,8 +87,8 @@ def plot_temp () :
     df = pd.read_csv('sensor_readings.csv')
     
     #plotting 
-    temps_to_plot = df.loc[40:81, "Temperature(C)"].tolist()
-    times_to_plot = df.loc[40:81, "Time (s)"].tolist()
+    temps_to_plot = df.loc[41:80, "Temperature(C)"].tolist()
+    times_to_plot = df.loc[41:80, "Time (s)"].tolist()
     print(temps_to_plot)
     print(times_to_plot)
     
@@ -151,10 +151,14 @@ def load_csv() :
 
 #Calling the functions
 if __name__ == "__main__" :
-    #sample_temps()
-    #plot_temp()
-    #plot_freq()
-    #sample_noises()
+    #5.1
+    plot_freq()
+    #5.2
+    sample_noises()
+    #5.3
+    sample_temps()
+    plot_temp()
+    #6
     load_csv()
 
 
