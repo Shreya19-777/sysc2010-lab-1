@@ -1,5 +1,12 @@
-SYSC 2010 Lab 1.
+# SYSC 2010 Lab 1.
+The purpose of this lab is to get familirized with tools that will be used in future labs and projects throughout the course and practice python skills.
+This lab generates synthetic signals, visualize given data (csv files).
 
-Problems encountered:
-- Downloading the required libraries in the project.
+## Problems encountered:
+- Difficulty with both team members having consistent set up by creating enviroment properly and downloading the required libraries in the project.
+- Challenges with GitHub collabration. In some cases, changes were not immedietly visible to a team member untill restarting the prgram.
+- Figuring out specific syntaxes to perform certain tasks
 
+### Usage: This program can be used to visualize temprature vs time and humidity vs time plot.
+
+#### Authors: Shreya Prasad, Naisibai Wusiman
